@@ -1,6 +1,8 @@
 import os
+from PIL import Image
+from ImageProcessing import watermark
 
-photo_path = r"I:\2020广西设计周-专业拍摄团队素材\照片素材\5号照片汇总\2020.12.5设计周出图盘\烧鸡出片盘\烧鸡出片无logo\D75_6168.jpg"
+photo_flie = r"F:\Video\2020广西设计周\Photo\志愿者照片\_MG_0711.JPG"
+photo_flie = '/'.join(photo_flie.split('\\'))
 
-a = os.path.dirname(photo_path)
-print(a)
+watermark.photo_scale_long_only(photo_flie, 1920)
