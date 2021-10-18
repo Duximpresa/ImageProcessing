@@ -1,8 +1,8 @@
 from datetime import datetime
 import time
 
-a = datetime.now()
-time.sleep(1)
-b = datetime.now()
-c = b - a
-print(c)
+start_time = datetime.now()
+
+end_time = datetime.now()
+code_time = end_time - start_time
+print(code_time)
