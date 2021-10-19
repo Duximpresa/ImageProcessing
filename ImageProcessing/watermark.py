@@ -137,7 +137,7 @@ def watermark_run_only(photo_file, logo_file):
     photo_save(im_new_photo, patch + "/" + 'ok/', name, format)
     # counte += 1
     # progress = round((counte + 1) / all * 100)
-    print(f'打水印:{name}')
+    print(f'\r打水印:{name}')
     # print(f'\r已完成 {progress}%', end="")
 
 def photo_scale_long_only(photo_file, long):
@@ -159,7 +159,7 @@ def photo_scale_long_only(photo_file, long):
     photo_save(im_new_photo, patch, name, format)
     # counte += 1
     # progress = round((counte + 1) / all * 100)
-    print(f'改尺寸：{name}')
+    print(f'\r改尺寸：{name}')
     # print(f'\r已完成 {progress}%', end="")
 
 def watermark_run_cpu(photo_path, logo_file):
