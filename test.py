@@ -1,10 +1,10 @@
 from ImageProcessing import watermark
 from datetime import datetime
 
-photo_path = r"I:\2020广西设计周-专业拍摄团队素材\照片素材\5号照片汇总\2020.12.5设计周出图盘\迷失出片盘\无logo图片"
+photo_path = r"I:\2020广西设计周-专业拍摄团队素材\照片素材\6号照片汇总\2020.12.6设计周出图盘\无logo图汇总\迷失"
 photo_file = r"I:\2020广西设计周-专业拍摄团队素材\照片素材\5号照片汇总\2020.12.5设计周出图盘\烧鸡出片盘\烧鸡出片无logo\D75_6168.jpg"
 logo_file = r"F:\Video\2021广西设计周宣传视频\青秀区\logo\2020G广西设计周logo_白.png"
-long = 1920
+long = 2400
 angle = int(-90)
 
 def main():
@@ -32,4 +32,4 @@ def main3():
     code_time = end_time - start_time
     print("用时：", code_time)
 if __name__ == '__main__':
-    main()
+    main3()
