@@ -26,7 +26,7 @@ def im_composition(width, height):
         return 2
 
 
-def logo_new_size(pw, ph, lw, lh, percen=0.3):  # logo的大小
+def logo_new_size(pw, ph, lw, lh, percen=0.25):  # logo的大小
     w = round(pw * percen)
     h = round(ph * percen)
     lwn = w
