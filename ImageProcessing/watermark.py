@@ -119,7 +119,7 @@ def watermark_run(photo_path, logo_file):
     print(f"已完成 {counte} 张照片")
 
 
-def watermark_run_only(photo_file, logo_file):
+def watermark_run_only(photo_file, logo_file):  #单张打水印
     logo_file = logo_file
     im_logo = Image.open(logo_file)
     patch = os.path.dirname(photo_file)
@@ -128,7 +128,11 @@ def watermark_run_only(photo_file, logo_file):
 
     photo_file = photo_file
     im_photo = Image.open(photo_file)
-    newsize = logo_new_size(im_photo.size[0], im_photo.size[1], im_logo.size[0], im_logo.size[1])
+    if im_composition(im_photo.size[0], im_photo.size[1]) == 1:
+        newsize = logo_new_size(im_photo.size[0], im_photo.size[1], im_logo.size[0], im_logo.size[1])
+    else:
+        newsize = logo_new_size(im_photo.size[1], im_photo.size[0], im_logo.size[0], im_logo.size[1])
+
     im_new_logo = logo_resize(im_logo, newsize)
     postiton = logo_postiton(im_photo.size, im_new_logo.size)
     im_new_photo = photo_logo(im_photo, im_new_logo, postiton)

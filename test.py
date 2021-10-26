@@ -1,9 +1,9 @@
 from ImageProcessing import watermark
 from datetime import datetime
 
-photo_path = r"F:\Video\2021广西设计周记录\photo\10_24\10-24-开会合影"
+photo_path = r"E:\项目\2021广西设计周\Photo\2021test\2021\10-26\11_30"
 photo_file = r"I:\2020广西设计周-专业拍摄团队素材\照片素材\5号照片汇总\2020.12.5设计周出图盘\烧鸡出片盘\烧鸡出片无logo\D75_6168.jpg"
-logo_file = r"F:\Video\2021广西设计周宣传视频\logo\2021创意生活节x广西设计周_白_阴影.png"
+logo_file = r"E:\项目\2021广西设计周\logo\2021广西设计周logo\2021创意生活节x广西设计周_白_阴影.png"
 long = 1920
 angle = int(-90)
 
@@ -28,7 +28,7 @@ def main3():
     start_time = datetime.now()
 
     watermark.watermark_run_cpu(photo_path, logo_file)
-    photo_path_ok = photo_path  # + "/ok"
+    photo_path_ok = photo_path   + "/ok"
     watermark.photo_scale_long_cpu(photo_path_ok, long)
 
     end_time = datetime.now()
