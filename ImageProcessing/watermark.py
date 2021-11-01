@@ -76,8 +76,14 @@ def file_filter(file_list, name):
     return file_lists
 
 
-def photo_filter(patch, name):
+def photo_filter(patch, name):  #单个文件夹的文件
     file_lists = file_list(patch)
+    photo_list = file_filter(file_lists, name)
+    return photo_list
+
+def photo_filter_all(patch, name):  #全部子文件夹的文件
+    # file_lists = file_list(patch)
+    _, file_lists = getFlist(patch)
     photo_list = file_filter(file_lists, name)
     return photo_list
 
@@ -182,11 +188,46 @@ def watermark_run_cpu(photo_path, logo_file):
 
     # print(f"已完成 {counte} 张照片")
 
+def watermark_run_cpu_all(photo_path, logo_file): #全部子文件夹的文件
+    patch = photo_path
+    patch = '/'.join(patch.split('\\'))
+    logo_file = logo_file
+    jpg_list = photo_filter_all(patch, "jpg")
+    # im_logo = Image.open(logo_file)
+    dir, _ = getFlist(photo_path)
+    for i in dir:
+        ok_dir(i + '/ok')
+    # counte = 0
+    # all = len(jpg_list)
+
+    with ThreadPoolExecutor(8) as t:
+        for i in jpg_list:
+            # t.submit(watermark_run_only, patch + "/" + i, logo_file)
+            t.submit(watermark_run_only,  i, logo_file)
+
+    # print(f"已完成 {counte} 张照片")
+
 def photo_scale_long_cpu(photo_path, long):
     patch = photo_path
     patch = '/'.join(patch.split('\\'))
     # logo_file = logo_file
     jpg_list = photo_filter(patch, "jpg")
+    # im_logo = Image.open(logo_file)
+    # ok_dir(patch + '/ok')
+    # counte = 0
+    # all = len(jpg_list)
+
+    with ThreadPoolExecutor(8) as t:
+        for i in jpg_list:
+            t.submit(photo_scale_long_only, patch + "/" + i, long)
+
+    # print(f"已完成 {counte} 张照片")
+
+def photo_scale_long_cpu_all(photo_path, long):
+    patch = photo_path
+    patch = '/'.join(patch.split('\\'))
+    # logo_file = logo_file
+    jpg_list = photo_filter_all(patch, "jpg")
     # im_logo = Image.open(logo_file)
     # ok_dir(patch + '/ok')
     # counte = 0
@@ -278,6 +319,25 @@ def photo_rot_list(photo_path, angle):
         print(f'\r已完成 {progress}%', end="")
     print(f"已完成 {counte} 张照片")
 
+
+def photo_rot_list_all(photo_path, angle):
+    patch = photo_path
+    patch = '/'.join(patch.split('\\'))
+    jpg_list = photo_filter_all(patch, "jpg")
+    counte = 0
+    all = len(jpg_list)
+    for i in jpg_list:
+        photo_file = patch + "/" + i
+        im_photo = Image.open(photo_file)
+        im_new_photo = im_photo.rotate(angle, expand=True)
+        name = os.path.splitext(i)[0]
+        format = os.path.splitext(i)[1][1:]
+        photo_save(im_new_photo, patch, name, format)
+        counte += 1
+        progress = round((counte + 1) / all * 100)
+        print(f'\r已完成 {progress}%', end="")
+    print(f"已完成 {counte} 张照片")
+
 def getFlist(file_dir):
     roots = []
     dirs = []
@@ -287,16 +347,16 @@ def getFlist(file_dir):
         # print(dir)
         # print(file)
         root = '/'.join(root.split('\\'))
-        print(root)
+        # print(root)
         for i in file:
-            print(i)
+            # print(i)
             flpath = os.path.join(root, i)
             flpath = '/'.join(flpath.split('\\'))
             flist.append(flpath)
-        # roots.append(root)
+        roots.append(root)
         # dirs.append(dir)
         # files.append(flpath)
-    return flist
+    return roots, flist
 
 # Image.thumbnail(1920, 1920)  图像缩放，代开发
 
