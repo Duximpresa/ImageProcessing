@@ -278,6 +278,25 @@ def photo_rot_list(photo_path, angle):
         print(f'\r已完成 {progress}%', end="")
     print(f"已完成 {counte} 张照片")
 
+def getFlist(file_dir):
+    roots = []
+    dirs = []
+    flist = []
+    for root, dir, file in os.walk(file_dir):
+        # print(root)
+        # print(dir)
+        # print(file)
+        root = '/'.join(root.split('\\'))
+        print(root)
+        for i in file:
+            print(i)
+            flpath = os.path.join(root, i)
+            flpath = '/'.join(flpath.split('\\'))
+            flist.append(flpath)
+        # roots.append(root)
+        # dirs.append(dir)
+        # files.append(flpath)
+    return flist
 
 # Image.thumbnail(1920, 1920)  图像缩放，代开发
 
