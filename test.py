@@ -35,7 +35,7 @@ def main3():
     code_time = end_time - start_time
     print("用时：", code_time)
 
-def main4():
+def main4(): #全部文件夹
     start_time = datetime.now()
 
     watermark.watermark_run_cpu_all(photo_path, logo_file)
