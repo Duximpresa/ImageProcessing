@@ -207,6 +207,13 @@ def watermark_run_cpu_all(photo_path, logo_file): #全部子文件夹的文件
 
     # print(f"已完成 {counte} 张照片")
 
+def watermark_run_cpu_all_2(photo_path, logo_file): #全部子文件夹的文件
+    all_dir, _ = getFlist(photo_path)
+
+    for path in all_dir:
+        watermark_run_cpu(path, logo_file)
+
+
 def photo_scale_long_cpu(photo_path, long):
     patch = photo_path
     patch = '/'.join(patch.split('\\'))
@@ -387,9 +394,12 @@ def main():
 
 
 def main2():
-    photo_path = r"J:\DuximpresaProject\PychramProject\ImageProcessing\01"
-    size = 1920
-    photo_size_long(photo_path, size)
+    photo_path = r"F:\Photo\X100V\2021"
+    logo_file = r"F:\Video\2021广西设计周宣传视频\logo\2021创意生活节x广西设计周_白_阴影.png"
+    all_dir, _ = getFlist(photo_path)
+    print(all_dir)
+    for path in all_dir:
+        watermark_run_cpu(path, logo_file)
 
 
 if __name__ == "__main__":
